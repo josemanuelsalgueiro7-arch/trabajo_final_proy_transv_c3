@@ -5,17 +5,13 @@ Proyecto Transversal C3 – Facultad de Ingeniería UNMDP
 
 ### Objetivo
 
-Crear un Sistema de Control de Acceso mediante lectura de tarjetas por aproximación (RFID). El mismo deberá indicar al usuario si está autorizado, si su tarjeta es válida o no, en una pantalla LCD. A su vez, el acceso autorizado deberá indicarse por leds en formato semáforo (VERDE: puede pasar, ROJO: tarjeta inválida, AMARILLO: otras alertas). Se simulará con una función vacía la consulta a una base de datos, para posibles implementaciones en un ambiente real de control de acceso de personal. En forma opcional, se anunciará con una señal sonora los actos de lectura, rechazo y otras alertas.
-
-Crear una función de empadronamiento de tarjetas, mediante comando en puerto serie o botón, que permita agregar una tarjeta como autorizada para el acceso. Este modo deberá ser informado con un led AZUL de lectura, y un texto de “Agregado Satisfactorio” en la pantalla LCD. Si es posible, completar el proceso de empadronamiento con la opción de eliminar una tarjeta.
-
-La comunicación entre el servidor (la computadora con entorno de desarrollo Arduino) y el control de acceso (placa Arduino) debe realizarse mediante cable de red, en un intento de reproducir condiciones reales de un Sistema de Control de Acceso, gestionado remotamente por una oficina de Cómputos.
+Crear un Sistema de Control de Acceso mediante lectura de tarjetas por aproximación (RFID). El mismo deberá indicar al usuario si está autorizado, si su tarjeta es válida o no, en una pantalla LCD. A su vez, el acceso autorizado deberá indicarse por leds en formato semáforo (VERDE: puede pasar, ROJO: tarjeta inválida, AMARILLO: otras alertas). Se anunciará con una señal sonora los actos de lectura o rechazo.
 
 ### Componentes
 
 - Placa Arduino UNO.
-- Diodos Led de varios colores, o módulo Led RGB HW479 (en caso de reducir cables).
-- Resistencias de 220 Ohms (en el caso de no usar led RGB).
+- Módulo Led RGB HW479.
+- Resistencias de 220 y 470 Ohms.
 - Pantalla LCD 16x2 con módulo de comunicación I2C integrado.
 - Sensor lector de tarjetas RFID-RC522.
 - Tarjetas y llaveros de prueba.
@@ -35,4 +31,38 @@ Para poder resolver el problema general, es necesario separar en partes el mismo
 Para la lectura de las tarjetas por aproximación, usamos el módulo RC522. El mismo trabaja a 3.3V, por lo que es necesario un conversor lógico de 5V a 3.3V (ST1167). Como no lo tenemos, la alternativa más próxima es armar un divisor de tensión sobre las cinco líneas de comunicación que pueden verse afectadas con un voltaje alto (SDA, SCK, MOSI, MISO y RST). Dicho divisor de tensión se armó con resistencias de 220Ω y 470Ω.
 
 A continuación se puede ver el circuito que recibe la información por RFID de las tarjetas:
+
+![Foto del cricuito Arduino conectado a RC522](img/circuito_RFID.png)
   
+El lector obtiene los datos en forma de números hexadecimales. El acto de lectura se mostrará al usuario con la confirmación visual de un LED AZUL.
+
+| RC522 | Arduino UNO |
+| :---: | :---------: |
+| GND | GND |
+| VCC | 3.3V |
+| SDA | 10 |
+| SCK | 13 |
+| MOSI | 11 |
+| MISO | 12 |
+| RST | 9 |
+
+#### Procesamiento de Datos
+
+En esta parte no hay mucha comunicación con sensores, sino con los datos recibidos y los strings de tarjetas admitidas, ya guardados en variables. En esta parte del sketch se prepara la información que se enviará al cliente web y a la pantalla LCD. A saber:
+
+1. En función del número de tarjeta, determinar si es válida. Si lo anterior se cumple, determinar si el agente tiene acceso o no.
+2. Preparar los mensajes que saldrán hacia la pantalla LCD, detallando nro de tarjeta y resultado (“AUTORIZADO”, “SIN ACCESO”, “SIN LECTURA”).
+3. En función del resultado activar led usado previamente para lectura, con tonos de semáforo, para que tengan coherencia con los estados presentados en el LCD.
+
+#### Muestra de Datos e Información Visual
+
+Luego de obtener los datos del sensor RC522, procesar la información y verificar el acceso del personal y la validez de la lectura. Es necesario comunicar al usuario en forma resumida el resultado del registro. Esto lo hacemos con la ayuda de un display 16x2 (dos renglones de dieciséis caracteres, mediante el protocolo I2C) y el módulo led RGB.
+
+![Foto del cricuito Arduino conectado a LCD i2c](img/LCD.png)
+
+| LCD 1602 | Arduino UNO |
+| :------: | :---------: |
+| GND | GND |
+| VCC |	5V |
+| SDA |	A4 |
+| SCL |	A5 |
