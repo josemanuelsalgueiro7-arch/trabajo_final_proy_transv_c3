@@ -50,7 +50,7 @@ Para este sensor se utilizó la librería [MFRC522 del usuario de Github miguelb
 
 #### Procesamiento de Datos
 
-En esta parte no hay mucha comunicación con sensores, sino con los datos recibidos y los strings de tarjetas admitidas, ya guardados en variables. En esta parte del sketch se prepara la información que se enviará al cliente web y a la pantalla LCD. A saber:
+En esta parte no hay mucha comunicación con sensores, sino con los datos recibidos y los strings de tarjetas admitidas, ya guardados en variables. En esta parte del sketch se prepara la información que se enviará a la pantalla LCD. A saber:
 
 1. En función del número de tarjeta, determinar si es válida. Si lo anterior se cumple, determinar si el agente tiene acceso o no.
 2. Preparar los mensajes que saldrán hacia la pantalla LCD, detallando nro de tarjeta y resultado (“AUTORIZADO”, “SIN ACCESO”, “SIN LECTURA”).
