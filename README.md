@@ -33,6 +33,7 @@ Para la lectura de las tarjetas por aproximación, usamos el módulo RC522. El m
 A continuación se puede ver el circuito que recibe la información por RFID de las tarjetas:
 
 ![Foto del cricuito Arduino conectado a RC522](img/circuito_RFID.png)
+
   
 El acto de lectura se mostrará al usuario con la confirmación visual de un LED AZUL.
 
