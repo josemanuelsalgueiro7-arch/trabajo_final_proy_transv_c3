@@ -46,6 +46,8 @@ El lector obtiene los datos en forma de números hexadecimales. El acto de lectu
 | MISO | 12 |
 | RST | 9 |
 
+Para este sensor se utilizó la librería [MFRC522 del usuario de Github miguelbalboa](https://github.com/miguelbalboa/rfid).
+
 #### Procesamiento de Datos
 
 En esta parte no hay mucha comunicación con sensores, sino con los datos recibidos y los strings de tarjetas admitidas, ya guardados en variables. En esta parte del sketch se prepara la información que se enviará al cliente web y a la pantalla LCD. A saber:
@@ -66,3 +68,12 @@ Luego de obtener los datos del sensor RC522, procesar la información y verifica
 | VCC |	5V |
 | SDA |	A4 |
 | SCL |	A5 |
+
+Para poder operar la pantalla se utilizó la librería [LiquidCrystal_I2C](https://github.com/markub3327/LiquidCrystal_I2C).
+
+| Módulo RGB | Arduino UNO |
+| :--------: | :---------: |
+| GND | GND |
+| ROJO | 4 |
+| VERDE | 3 |
+| AZUL | 2 |
