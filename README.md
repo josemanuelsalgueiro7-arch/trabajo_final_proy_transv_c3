@@ -28,7 +28,7 @@ Para poder resolver el problema general, es necesario separar en partes el mismo
 
 #### Lectura de Tarjetas por RFID
 
-Para la lectura de las tarjetas por aproximación, usamos el módulo RC522. El mismo trabaja a 3.3V, por lo que es necesario un conversor lógico de 5V a 3.3V (ST1167). Como no lo tenemos, la alternativa más próxima es armar un divisor de tensión sobre las cinco líneas de comunicación que pueden verse afectadas con un voltaje alto (SDA, SCK, MOSI, MISO y RST). Dicho divisor de tensión se armó con resistencias de 220Ω y 470Ω.
+Para la lectura de las tarjetas por aproximación, usamos el módulo RC522. El mismo trabaja a 3.3V, por lo que es necesario un conversor lógico de 5V a 3.3V (ST1167). Como no lo tenemos, la alternativa más próxima es armar un [divisor de tensión](img/divisor_tension.png) sobre las cinco líneas de comunicación que pueden verse afectadas con un voltaje alto (SDA, SCK, MOSI, MISO y RST). Dicho divisor de tensión se armó con resistencias de 220Ω y 470Ω.
 
 A continuación se puede ver el circuito que recibe la información por RFID de las tarjetas:
 
