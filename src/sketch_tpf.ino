@@ -94,7 +94,7 @@ void loop() {
     digitalWrite(PIN_RGB_VERDE, LOW);
     digitalWrite(PIN_RGB_ROJO, LOW);
 
-    // 3 - Muestro en LCD la información poco antes de guardar
+    // 3 - Muestro en LCD la información
     
     delay(1500);
 
