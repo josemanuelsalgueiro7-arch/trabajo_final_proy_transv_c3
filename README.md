@@ -34,7 +34,7 @@ A continuación se puede ver el circuito que recibe la información por RFID de 
 
 ![Foto del cricuito Arduino conectado a RC522](img/circuito_RFID.png)
   
-El lector obtiene los datos en forma de números hexadecimales. El acto de lectura se mostrará al usuario con la confirmación visual de un LED AZUL.
+El acto de lectura se mostrará al usuario con la confirmación visual de un LED AZUL.
 
 | RC522 | Arduino UNO |
 | :---: | :---------: |
